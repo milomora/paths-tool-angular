@@ -1,0 +1,48 @@
+// Colors
+// Purple
+$purple-primary: #9329f5;
+$purple-dark: #6a1bb9;
+$purple-darker: #3f0c6e;
+
+// Accent purple
+$purple-accent-1: #a85ca6;
+$purple-accent-2: #965ced;
+$purple-accent-3: #b586f8;
+$purple-accent-4: #d5b2fa;
+$purple-accent-5: #e4ddfc;
+
+// Common colors
+$black: #000000;
+$gray-dark: #444444;
+$gray: #96968d;
+$gray-light: #e6e6dd;
+$white: #ffffff;
+$blue: #1645e7;
+$light-blue: #74fbfd;
+$green: #91fb6b;
+$blue-green: #6eecab;
+$red: #eb474d;
+$pink: #ec5e9e;
+$orange: #ee7f31;
+$yellow: #fceb5c;
+$background: #f5f5f5;
+
+// Font
+$ff-roboto: Roboto, 'Helvetica Neue', sans-serif;
+
+$cssvars-prefix: 'studio-';
+
+// Variable functions / mixins
+@function buildVarName($name) {
+  @return '--#{$cssvars-prefix}#{$name}';
+}
+
+@function getVar($name) {
+  $varName: buildVarName($name);
+  @return var(#{$varName});
+}
+
+@mixin register-var($name, $value) {
+  $varName: buildVarName($name);
+  #{$varName}: #{$value};
+}

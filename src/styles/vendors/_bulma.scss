@@ -1,0 +1,19 @@
+@use '../variables' as var;
+
+// Override global Sass variables from the /utilities folder
+@use 'bulma/sass/utilities' with (
+  $cssvars-prefix: var.$cssvars-prefix,
+  $primary: var.$purple-primary,
+  $link: var.$pink,
+  $family-primary: var.$ff-roboto
+);
+
+// Import the components you need
+@forward 'bulma/sass/base';
+@forward 'bulma/sass/grid';
+@forward 'bulma/sass/layout';
+@forward 'bulma/sass/base/skeleton';
+@forward 'bulma/sass/helpers';
+
+// Import the themes so that all CSS variables have a value
+@forward 'bulma/sass/themes';

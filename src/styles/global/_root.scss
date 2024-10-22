@@ -1,0 +1,10 @@
+@use 'variables' as var;
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: var.$ff-roboto;
+}

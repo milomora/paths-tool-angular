@@ -1,0 +1,17 @@
+@use 'variables' as var;
+
+@use 'bulma/sass' with (
+  $cssvars-prefix: var.$cssvars-prefix,
+  $primary: var.$purple-primary,
+  $link: var.$pink
+);
+
+// Import the components you need
+@forward 'bulma/sass/base';
+@forward 'bulma/sass/grid';
+@forward 'bulma/sass/layout';
+@forward 'bulma/sass/base/skeleton';
+@forward 'bulma/sass/helpers';
+
+// Import the themes so that all CSS variables have a value
+@forward 'bulma/sass/themes';

@@ -31,6 +31,8 @@ const estLintConfig = tseslint.config(
           style: 'kebab-case',
         },
       ],
+      '@typescript-eslint/consistent-type-definitions': 'off',
+      '@typescript-eslint/no-unused-vars': 'warn',
     },
   },
   {

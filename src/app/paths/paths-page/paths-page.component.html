@@ -1,9 +1,63 @@
-<h2 class="py-5 is-size-3">Paths Page</h2>
+<div class="is-flex is-justify-content-space-between is-align-items-center">
+  <h1 class="is-size-1 my-2">Paths</h1>
+</div>
 
-<ul>
-  <li><a routerLink="1">Path 1</a></li>
-  <li><a routerLink="2">Path 2</a></li>
-  <li><a routerLink="3">Path 3</a></li>
-  <li><a routerLink="4">Path 4</a></li>
-  <li><a routerLink="5">Path 5</a></li>
-</ul>
+<hr class="mt-0" />
+
+<div class="my-5">
+  <h4 class="my-2 is-size-4">Favorite Paths</h4>
+
+  <ul class="path-list">
+    @for (item of favoritePaths; track item.id) {
+      <li
+        class="paths-list-item columns is-vcentered card"
+        [routerLink]="item.slug"
+        [ngClass]="{ favorite: isFavorite(item.slug) }"
+      >
+        <span class="column is-narrow logo-column">
+          <img [src]="item.logo" alt="Logo" />
+        </span>
+        <span class="column is-3 is-size-4">{{ item.name }}</span>
+        <span class="column">{{ item.description }}</span>
+        <span class="column is-2">{{ item.author }}</span>
+        <span class="column is-2">{{ formatDate(item.date) }}</span>
+        <span class="column is-narrow">
+          <button mat-icon-button class="fav-button" aria-label="Save path" (click)="toggleFavorite($event, item.slug)">
+            <mat-icon>star</mat-icon>
+          </button>
+        </span>
+      </li>
+    } @empty {
+      <li class="has-text-centered is-size-3">No paths</li>
+    }
+  </ul>
+</div>
+
+<div class="my-5">
+  <h4 class="my-2 is-size-4">All Paths</h4>
+
+  <ul class="path-list">
+    @for (item of pathsData; track item.id) {
+      <li
+        class="paths-list-item columns is-vcentered card"
+        [routerLink]="item.slug"
+        [ngClass]="{ favorite: isFavorite(item.slug) }"
+      >
+        <span class="column is-narrow logo-column">
+          <img [src]="item.logo" alt="Logo" />
+        </span>
+        <span class="column is-3 is-size-4">{{ item.name }}</span>
+        <span class="column">{{ item.description }}</span>
+        <span class="column is-2">{{ item.author }}</span>
+        <span class="column is-2">{{ formatDate(item.date) }}</span>
+        <span class="column is-narrow">
+          <button mat-icon-button class="fav-button" aria-label="Save path" (click)="toggleFavorite($event, item.slug)">
+            <mat-icon>star</mat-icon>
+          </button>
+        </span>
+      </li>
+    } @empty {
+      <li class="has-text-centered is-size-3">No paths</li>
+    }
+  </ul>
+</div>

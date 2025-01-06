@@ -7,7 +7,7 @@ const PATHS_MOCK_DATA: PathListItem[] = [
     name: 'Angular Path',
     description: 'Angular path description',
     author: 'Milo',
-    date: new Date(1720205276081),
+    date: 1720205276081,
     slug: 'angular-path',
   },
   {
@@ -16,7 +16,7 @@ const PATHS_MOCK_DATA: PathListItem[] = [
     name: 'NextJS Path',
     description: 'NextJS path description',
     author: 'Diego',
-    date: new Date(1720205276081),
+    date: 1720205276081,
     slug: 'nextjs-path',
   },
   {
@@ -25,7 +25,7 @@ const PATHS_MOCK_DATA: PathListItem[] = [
     name: 'CSS Path',
     description: 'CSS path description',
     author: 'Jesus',
-    date: new Date(1720205276081),
+    date: 1720205276081,
     slug: 'css-path',
   },
   {
@@ -34,7 +34,7 @@ const PATHS_MOCK_DATA: PathListItem[] = [
     name: 'Accessibility Path',
     description: 'Accessibility description',
     author: 'Luigi',
-    date: new Date(1720205276081),
+    date: 1720205276081,
     slug: 'accessibility-path',
   },
   {
@@ -43,7 +43,7 @@ const PATHS_MOCK_DATA: PathListItem[] = [
     name: 'Javascript Path',
     description: 'Javascript description',
     author: 'Luna',
-    date: new Date(1720205276081),
+    date: 1720205276081,
     slug: 'javascript-path',
   },
 ];

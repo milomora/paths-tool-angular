@@ -4,6 +4,6 @@ export type PathListItem = {
   name: string;
   description: string;
   author: string;
-  date: Date;
+  date: number;
   slug: string;
 };

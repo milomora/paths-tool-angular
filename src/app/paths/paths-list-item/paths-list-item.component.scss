@@ -1,0 +1,27 @@
+@use 'variables' as var;
+
+.paths-list-item {
+  border: 1px solid var.getVar('grey-lighter');
+  margin: 0;
+  cursor: pointer;
+
+  &:hover {
+    border-color: var.getVar('link');
+  }
+
+  .logo-column {
+    width: 5rem;
+    height: 5rem;
+    text-align: center;
+
+    img {
+      max-height: 100%;
+    }
+  }
+
+  &.favorite {
+    .fav-button {
+      color: var.getVar('link');
+    }
+  }
+}

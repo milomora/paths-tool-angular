@@ -1,0 +1,18 @@
+<li
+  class="paths-list-item columns is-vcentered card"
+  [routerLink]="itemData.slug"
+  [ngClass]="{ favorite: isFavorite(itemData.slug) }"
+>
+  <span class="column is-narrow logo-column">
+    <img [src]="itemData.logo" alt="Logo" />
+  </span>
+  <span class="column is-3 is-size-4">{{ itemData.name }}</span>
+  <span class="column">{{ itemData.description }}</span>
+  <span class="column is-2">{{ itemData.author }}</span>
+  <span class="column is-2">{{ formatDate(itemData.date) }}</span>
+  <span class="column is-narrow">
+    <button mat-icon-button class="fav-button" aria-label="Save path" (click)="toggleFavorite($event, itemData.slug)">
+      <mat-icon>star</mat-icon>
+    </button>
+  </span>
+</li>

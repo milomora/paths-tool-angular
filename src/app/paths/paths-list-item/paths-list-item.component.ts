@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { PathListItem } from '../../shared/types/paths-types';
+import { PathService } from '../../shared/services/path.service';
 
 @Component({
   selector: 'app-paths-list-item',
@@ -12,9 +13,9 @@ import { PathListItem } from '../../shared/types/paths-types';
   styleUrl: './paths-list-item.component.scss',
 })
 export class PathsListItemComponent {
+  private pathsService = inject(PathService);
+
   @Input({ required: true }) itemData!: PathListItem;
-  @Input({ required: true }) favoriteList!: string[];
-  @Output() favoriteClick = new EventEmitter<{ isFavorite: boolean; slug: string }>();
 
   formatDate(timestamp: number): string {
     const date = new Date(timestamp);
@@ -22,13 +23,13 @@ export class PathsListItemComponent {
   }
 
   isFavorite(slug: string): boolean {
-    return this.favoriteList.includes(slug);
+    return this.pathsService.favoriteList.includes(slug);
   }
 
   toggleFavorite(event: MouseEvent, slug: string) {
     event.preventDefault();
     event.stopPropagation();
 
-    this.favoriteClick.emit({ isFavorite: this.isFavorite(slug), slug });
+    this.pathsService.toggleFavorite(this.isFavorite(slug), slug);
   }
 }

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { PathListItem } from '../../shared/types/paths-types';
 import { PathsListComponent } from '../paths-list/paths-list.component';
+import { PathService } from '../../shared/services/path.service';
 
 @Component({
   selector: 'app-paths-page',
@@ -10,28 +11,23 @@ import { PathsListComponent } from '../paths-list/paths-list.component';
   styleUrl: './paths-page.component.scss',
 })
 export class PathsPageComponent implements OnInit {
+  private pathsService = inject(PathService);
+
   pathsData: PathListItem[];
-  favoriteList: string[] = [];
 
   constructor() {
     this.pathsData = [];
   }
 
   ngOnInit(): void {
-    fetch('/mock/paths-list-mock.json')
-      .then((data) => data.json())
-      .then((data: PathListItem[]) => (this.pathsData = data));
-  }
-
-  toggleFavorite(isFavorite: boolean, slug: string) {
-    if (isFavorite) {
-      this.favoriteList = this.favoriteList.filter((item) => item !== slug);
-    } else {
-      this.favoriteList.push(slug);
-    }
+    this.pathsService.getPathsList().subscribe((data) => (this.pathsData = data));
   }
 
   get favoritePaths(): PathListItem[] {
     return this.pathsData.filter((item) => this.favoriteList.includes(item.slug));
+  }
+
+  get favoriteList(): string[] {
+    return this.pathsService.favoriteList;
   }
 }

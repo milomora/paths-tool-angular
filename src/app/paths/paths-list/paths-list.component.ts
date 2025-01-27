@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { PathListItem } from '../../shared/types/paths-types';
 import { PathsListItemComponent } from '../paths-list-item/paths-list-item.component';
 
@@ -12,6 +12,4 @@ import { PathsListItemComponent } from '../paths-list-item/paths-list-item.compo
 export class PathsListComponent {
   @Input({ required: true }) title!: string;
   @Input({ required: true }) pathsData!: PathListItem[];
-  @Input({ required: true }) favoriteList!: string[];
-  @Output() favoriteClick = new EventEmitter<{ isFavorite: boolean; slug: string }>();
 }

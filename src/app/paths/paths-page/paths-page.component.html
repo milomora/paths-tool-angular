@@ -4,16 +4,6 @@
 
 <hr class="mt-0" />
 
-<app-paths-list
-  title="Favorites"
-  [pathsData]="favoritePaths"
-  [favoriteList]="favoriteList"
-  (favoriteClick)="toggleFavorite($event.isFavorite, $event.slug)"
-/>
+<app-paths-list title="Favorites" [pathsData]="favoritePaths" />
 
-<app-paths-list
-  title="All Paths"
-  [pathsData]="pathsData"
-  [favoriteList]="favoriteList"
-  (favoriteClick)="toggleFavorite($event.isFavorite, $event.slug)"
-/>
+<app-paths-list title="All Paths" [pathsData]="pathsData" />

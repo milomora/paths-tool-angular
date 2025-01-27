@@ -3,11 +3,7 @@
 
   <ul class="path-list">
     @for (item of pathsData; track item.id) {
-      <app-paths-list-item
-        [itemData]="item"
-        [favoriteList]="favoriteList"
-        (favoriteClick)="favoriteClick.emit($event)"
-      />
+      <app-paths-list-item [itemData]="item" />
     } @empty {
       <li class="has-text-centered is-size-3">No paths</li>
     }

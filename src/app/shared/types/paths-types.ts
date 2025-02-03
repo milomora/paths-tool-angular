@@ -6,4 +6,5 @@ export type PathListItem = {
   author: string;
   date: number;
   slug: string;
+  isFavorite?: boolean;
 };

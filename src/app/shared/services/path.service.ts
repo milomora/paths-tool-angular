@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { PathListItem } from '../types/paths-types';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, filter, lastValueFrom, map, Observable, take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,27 +9,46 @@ import { Observable } from 'rxjs';
 export class PathService {
   private http = inject(HttpClient);
 
-  private _favoriteList: string[] = [];
+  private pathsData = new BehaviorSubject<PathListItem[] | null>(null);
 
-  // constructor() { }
+  constructor() {
+    this.updatePaths();
+  }
 
   getPathsList(): Observable<PathListItem[]> {
     return this.http.get<PathListItem[]>('/mock/paths-list-mock.json');
   }
 
+  async updatePaths() {
+    return lastValueFrom(this.getPathsList()).then((data) => {
+      this.pathsData.next(data);
+
+      return data;
+    });
+  }
+
   toggleFavorite(isFavorite: boolean, slug: string) {
-    if (isFavorite) {
-      this.favoriteList = this.favoriteList.filter((item) => item !== slug);
-    } else {
-      this.favoriteList.push(slug);
-    }
+    // const currentData = this.pathsData.getValue();
+    // const itemFound = currentData?.find((item) => item.slug === slug);
+
+    // if (!currentData || !itemFound) return;
+
+    // itemFound.isFavorite = !isFavorite;
+
+    // this.pathsData.next(currentData);
+
+    this.paths$.pipe(take(1)).subscribe((data) => {
+      this.pathsData.next(
+        data.map((item) => ({ ...item, isFavorite: item.slug === slug ? !isFavorite : item.isFavorite })),
+      );
+    });
   }
 
-  get favoriteList(): string[] {
-    return this._favoriteList;
+  get paths$(): Observable<PathListItem[]> {
+    return this.pathsData.asObservable().pipe(filter((data) => data !== null));
   }
 
-  private set favoriteList(value: string[]) {
-    this._favoriteList = value;
+  get favoritePaths$(): Observable<PathListItem[]> {
+    return this.paths$.pipe(map((list) => list.filter((item) => item.isFavorite)));
   }
 }

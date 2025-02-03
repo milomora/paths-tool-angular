@@ -1,33 +1,25 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { PathListItem } from '../../shared/types/paths-types';
+import { Component, inject } from '@angular/core';
 import { PathsListComponent } from '../paths-list/paths-list.component';
 import { PathService } from '../../shared/services/path.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-paths-page',
   standalone: true,
-  imports: [PathsListComponent],
+  imports: [PathsListComponent, CommonModule],
   templateUrl: './paths-page.component.html',
   styleUrl: './paths-page.component.scss',
 })
-export class PathsPageComponent implements OnInit {
+export class PathsPageComponent {
   private pathsService = inject(PathService);
 
-  pathsData: PathListItem[];
+  // constructor() {}
 
-  constructor() {
-    this.pathsData = [];
+  get paths$() {
+    return this.pathsService.paths$;
   }
 
-  ngOnInit(): void {
-    this.pathsService.getPathsList().subscribe((data) => (this.pathsData = data));
-  }
-
-  get favoritePaths(): PathListItem[] {
-    return this.pathsData.filter((item) => this.favoriteList.includes(item.slug));
-  }
-
-  get favoriteList(): string[] {
-    return this.pathsService.favoriteList;
+  get favoritePaths$() {
+    return this.pathsService.favoritePaths$;
   }
 }

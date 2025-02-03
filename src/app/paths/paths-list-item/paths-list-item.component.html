@@ -1,8 +1,4 @@
-<li
-  class="paths-list-item columns is-vcentered card"
-  [routerLink]="itemData.slug"
-  [ngClass]="{ favorite: isFavorite(itemData.slug) }"
->
+<li class="paths-list-item columns is-vcentered card" [routerLink]="itemData.slug" [ngClass]="{ favorite: isFavorite }">
   <span class="column is-narrow logo-column">
     <img [src]="itemData.logo" alt="Logo" />
   </span>

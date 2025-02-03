@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -11,6 +11,7 @@ import { PathService } from '../../shared/services/path.service';
   imports: [RouterLink, MatIconModule, CommonModule],
   templateUrl: './paths-list-item.component.html',
   styleUrl: './paths-list-item.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PathsListItemComponent {
   private pathsService = inject(PathService);
@@ -22,14 +23,14 @@ export class PathsListItemComponent {
     return date.toLocaleDateString();
   }
 
-  isFavorite(slug: string): boolean {
-    return this.pathsService.favoriteList.includes(slug);
-  }
-
   toggleFavorite(event: MouseEvent, slug: string) {
     event.preventDefault();
     event.stopPropagation();
 
-    this.pathsService.toggleFavorite(this.isFavorite(slug), slug);
+    this.pathsService.toggleFavorite(this.isFavorite, slug);
+  }
+
+  get isFavorite(): boolean {
+    return !!this.itemData.isFavorite;
   }
 }

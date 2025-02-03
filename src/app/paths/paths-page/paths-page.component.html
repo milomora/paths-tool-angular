@@ -4,6 +4,6 @@
 
 <hr class="mt-0" />
 
-<app-paths-list title="Favorites" [pathsData]="favoritePaths" />
+<app-paths-list title="Favorites" [pathsData]="favoritePaths$ | async" />
 
-<app-paths-list title="All Paths" [pathsData]="pathsData" />
+<app-paths-list title="All Paths" [pathsData]="paths$ | async" />

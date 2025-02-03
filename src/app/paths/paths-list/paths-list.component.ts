@@ -11,5 +11,5 @@ import { PathsListItemComponent } from '../paths-list-item/paths-list-item.compo
 })
 export class PathsListComponent {
   @Input({ required: true }) title!: string;
-  @Input({ required: true }) pathsData!: PathListItem[];
+  @Input({ required: true }) pathsData!: PathListItem[] | null;
 }

@@ -1,0 +1,26 @@
+<div class="py-6">
+  <h3 class="is-size-2 has-text-centered has-text-weight-bold">Login</h3>
+
+  <form class="login-form mt-5" (ngSubmit)="loginSubmit()">
+    <mat-form-field appearance="outline">
+      <mat-label>User</mat-label>
+      <input matInput placeholder="User" name="user" autocomplete="username" [(ngModel)]="user" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="">
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        type="password"
+        placeholder="Password"
+        name="password"
+        autocomplete="password new-password"
+        [(ngModel)]="password"
+      />
+    </mat-form-field>
+
+    <div class="is-flex is-justify-content-space-between is-align-items-center">
+      <button mat-flat-button type="submit">Login</button>
+    </div>
+  </form>
+</div>

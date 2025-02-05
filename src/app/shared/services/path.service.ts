@@ -1,13 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { PathListItem } from '../types/paths-types';
+import { PathListData, PathListItem, PathListResponse } from '../types/paths-types';
 import { BehaviorSubject, filter, lastValueFrom, map, Observable, take } from 'rxjs';
+import { AuthService } from '../../core/services/auth.service';
+
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PathService {
   private http = inject(HttpClient);
+  private authService = inject(AuthService);
 
   private pathsData = new BehaviorSubject<PathListItem[] | null>(null);
 
@@ -16,7 +20,9 @@ export class PathService {
   }
 
   getPathsList(): Observable<PathListItem[]> {
-    return this.http.get<PathListItem[]>('/mock/paths-list-mock.json');
+    return this.http
+      .get<PathListResponse>(environment.apiUrl + '/api/paths')
+      .pipe(map((response) => this.mapPathListResponseToData(response).data));
   }
 
   async updatePaths() {
@@ -42,6 +48,21 @@ export class PathService {
         data.map((item) => ({ ...item, isFavorite: item.slug === slug ? !isFavorite : item.isFavorite })),
       );
     });
+  }
+
+  mapPathListResponseToData(source: PathListResponse): PathListData {
+    return {
+      data: source.data.map((item) => ({
+        id: item.id,
+        logo: item.attributes.logo,
+        name: item.attributes.name,
+        description: item.attributes.description,
+        author: item.attributes.author,
+        date: new Date(item.attributes.updatedAt),
+        slug: item.attributes.slug,
+      })),
+      meta: source.meta,
+    };
   }
 
   get paths$(): Observable<PathListItem[]> {

@@ -18,8 +18,7 @@ export class PathsListItemComponent {
 
   @Input({ required: true }) itemData!: PathListItem;
 
-  formatDate(timestamp: number): string {
-    const date = new Date(timestamp);
+  formatDate(date: Date): string {
     return date.toLocaleDateString();
   }
 

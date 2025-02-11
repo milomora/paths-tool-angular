@@ -1,10 +1,11 @@
 <div class="py-6">
   <h3 class="is-size-2 has-text-centered has-text-weight-bold">Login</h3>
 
-  <form class="login-form mt-5" (ngSubmit)="loginSubmit()">
+  <form class="login-form mt-5" (ngSubmit)="loginSubmit()" [formGroup]="loginForm">
     <mat-form-field appearance="outline">
       <mat-label>User</mat-label>
-      <input matInput placeholder="User" name="user" autocomplete="username" [(ngModel)]="user" />
+      <input matInput placeholder="User" name="user" autocomplete="username" formControlName="user" />
+      <mat-error>{{ getError(controls.user) }}</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="">
@@ -15,12 +16,13 @@
         placeholder="Password"
         name="password"
         autocomplete="password new-password"
-        [(ngModel)]="password"
+        formControlName="password"
       />
+      <mat-error>{{ getError(controls.password) }}</mat-error>
     </mat-form-field>
 
     <div class="is-flex is-justify-content-space-between is-align-items-center">
-      <button mat-flat-button type="submit">Login</button>
+      <button mat-flat-button type="submit" [disabled]="loginForm.invalid">Login</button>
     </div>
   </form>
 </div>

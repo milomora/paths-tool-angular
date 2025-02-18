@@ -1,1 +1,7 @@
-<p>path-item works!</p>
+@if (pathData) {
+  <div>{{ pathData | json }}</div>
+} @else {
+  <div class="is-flex-grow-1 is-flex is-justify-content-center is-align-items-center">
+    <mat-spinner />
+  </div>
+}

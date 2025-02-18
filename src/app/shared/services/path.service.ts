@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { PathListData, PathListItem, PathListResponse } from '../types/paths-types';
+import { PathItemResponse, PathListData, PathListItem, PathListResponse } from '../types/paths-types';
 import { BehaviorSubject, filter, lastValueFrom, map, Observable, take } from 'rxjs';
 import { AuthService } from '../../core/services/auth.service';
 
@@ -23,6 +23,13 @@ export class PathService {
     return this.http
       .get<PathListResponse>(environment.apiUrl + '/api/paths')
       .pipe(map((response) => this.mapPathListResponseToData(response).data));
+  }
+
+  // ToDo: Map PathItemResponse data to PathItemData type
+  getPathItemData(slug: string): Observable<PathItemResponse> {
+    return this.http.get<PathItemResponse>(
+      environment.apiUrl + '/api/paths/slug/' + slug + '?populate[topics][populate][subtopics][populate]=links',
+    );
   }
 
   async updatePaths() {

@@ -1,11 +1,11 @@
 import { HttpPagination } from './http-types';
 
 export type PathListResponse = {
-  data: PathItemResponse[];
+  data: PathListItemResponse[];
   meta: HttpPagination;
 };
 
-export type PathItemResponse = {
+export type PathListItemResponse = {
   id: number;
   attributes: {
     name: string;
@@ -34,3 +34,9 @@ export type PathListItem = {
   slug: string;
   isFavorite?: boolean;
 };
+
+// ToDO: Definy PathItemResponse type.
+export type PathItemResponse = Record<string, unknown>;
+
+// ToDO: Definy PathItemData type.
+export type PathItemData = Record<string, unknown>;
